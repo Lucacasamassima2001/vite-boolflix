@@ -1,6 +1,7 @@
 <script>
 import { store } from '../store';
 import CountryFlag from "vue-country-flag-next";
+import LangFlag from 'vue-lang-code-flags';
 
 
 
@@ -15,6 +16,7 @@ data(){
 
 components:{
     CountryFlag,
+    // LangFlag,
 },
 
 methods:{
@@ -30,11 +32,15 @@ methods:{
     <h1 v-show="store.FilmList!=0">Movies:</h1>
     <div class="container">
         <div class="card" v-for="film in store.FilmList" :key="film.id">
-            <img :src="'https://image.tmdb.org/t/p/w342'+film.poster_path"> 
+            <img :src="'https://image.tmdb.org/t/p/w342'+film.poster_path" :alt="film.title" >
             <div>{{ film.title }} </div>
             <div>{{ film.original_title }} </div>
-            <div>{{ film.original_language }} </div>
-            <!-- <country-flag country='it' size='normal'/> -->
+            <country-flag  v-if="film.original_language=== 'en'" country="gb" size='normal'/>
+            <country-flag  v-else-if="film.original_language=== 'ko'" country="kr" size='normal'/>
+            <country-flag  v-else-if="film.original_language=== 'ja'" country="jp" size='normal'/>
+            <country-flag  v-else-if="film.original_language=== 'zh'" country="ch" size='normal'/>
+            <country-flag  v-else-if="film.original_language=== 'hi'" country="in" size='normal'/>
+            <country-flag  v-else :country="film.original_language" size='normal'/>
             <div class="stars">
                 <span v-for="star in Math.ceil(film.vote_average / 2)" :key="star"> 
                     <font-awesome-icon :icon="['fas', 'star']" style="color: #FFBF00;" />
@@ -65,6 +71,8 @@ methods:{
 h1{
     text-align: center;
     margin-top: 2em;
+    color: white;
+
 }
 
     .card{

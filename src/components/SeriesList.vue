@@ -1,14 +1,23 @@
 <script>
 import { store } from '../store';
+import CountryFlag from "vue-country-flag-next";
+
+import LangFlag from 'vue-lang-code-flags';
 
 
 export default {
 data(){
     return{
         store,
+    
+
     }
 },
 
+components:{
+    CountryFlag,
+    // LangFlag,
+},
 
 methods:{
     
@@ -27,7 +36,12 @@ methods:{
             <img :src="'https://image.tmdb.org/t/p/w342'+serie.poster_path">
             <div>{{ serie.name }} </div>
             <div>{{ serie.original_name }} </div>
-            <div>{{ serie.original_language }} </div>
+            <country-flag  v-if="serie.original_language=== 'en'" country="gb" size='normal'/>
+            <country-flag  v-else-if="serie.original_language=== 'ko'" country="kr" size='normal'/>
+            <country-flag  v-else-if="serie.original_language=== 'ja'" country="jp" size='normal'/>
+            <country-flag  v-else-if="serie.original_language=== 'zh'" country="ch" size='normal'/>
+            <country-flag  v-else-if="serie.original_language=== 'hi'" country="in" size='normal'/>
+            <country-flag  v-else :country="serie.original_language" size='normal'/>
             <div class="stars">
                 <span v-for="star in Math.ceil(serie.vote_average / 2)" :key="star"> 
                     <font-awesome-icon :icon="['fas', 'star']" style="color: #FFBF00;" />
@@ -58,6 +72,7 @@ methods:{
 h1{
     text-align: center;
     margin-top: 2em;
+    color: white;
 }
 
     .card{

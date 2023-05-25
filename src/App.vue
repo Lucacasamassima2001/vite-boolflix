@@ -79,6 +79,12 @@ export default {
   box-sizing: border-box;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+
+.container{
+  background-color: rgb(38, 41, 42);
+}
+
 </style>
 
 

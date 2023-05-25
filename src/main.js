@@ -11,5 +11,5 @@ library.add(far)
 
 
 createApp(App)
-.component('font-awesome-icon', FontAwesomeIcon)
+.component('font-awesome-icon', FontAwesomeIcon,)
 .mount('#app')

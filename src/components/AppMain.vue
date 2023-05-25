@@ -2,7 +2,8 @@
 <script>
 import {store} from '../store';
 import FilmList from './FilmList.vue';
-import AppHeader from './AppHeader.vue';
+import SeriesList from './SeriesList.vue';
+
 
 export default {
     data(){
@@ -13,6 +14,7 @@ export default {
 
     components:{
         FilmList,
+        SeriesList,
     }
 
 }
@@ -20,9 +22,14 @@ export default {
 
 
 <template>
-    <FilmList/>
+    <main>
+        <FilmList/>
+        <SeriesList/>
+    </main>
+    
 </template>
 
-<style>
+<style scoped>
+
 
 </style>

@@ -13,7 +13,7 @@ export default {
 
 
     methods:{
-        emitsearchevent() {
+        emitsearcheventfilms() {
         this.$emit("performsearch");
     },
     
@@ -28,8 +28,8 @@ export default {
         <h1>Boolflix</h1>
     </div>
     <div class="container-search">
-        <input @keyup.enter="emitsearchevent" type="text" v-model="store.Searchtext" id="SearchBar" placeholder="Cerca...">
-        <button @click="emitsearchevent">Cerca</button>
+        <input @keyup.enter="emitsearcheventfilms" type="text" v-model="store.Searchtext" id="SearchBar" placeholder="Cerca...">
+        <button @click="emitsearcheventfilms">Cerca</button>
     </div>
   </div>
 </template>

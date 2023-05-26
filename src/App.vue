@@ -3,8 +3,7 @@ import {store} from './store';
 import axios from 'axios';
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
-// import FilmList from './components/FilmList.vue';
-import SeriesList from './components/SeriesList.vue';
+
 
 export default {
   data(){
@@ -81,9 +80,7 @@ export default {
 }
 
 
-.container{
-  background-color: rgb(38, 41, 42);
-}
+
 
 </style>
 

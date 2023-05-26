@@ -33,9 +33,16 @@ methods:{
     <h1 v-show="store.SeriesList!=0">TV Shows:</h1>
     <div class="container">
         <div class="card" v-for="serie in store.SeriesList" :key="serie.id">
-            <img :src="'https://image.tmdb.org/t/p/w342'+serie.poster_path">
-            <div>{{ serie.name }} </div>
+            <div class="card-inner">
+                <div class="card-front">
+                    <img :src="'https://image.tmdb.org/t/p/w342'+serie.poster_path" onerror="this.style.display='none'">
+                    <img v-if="serie.poster_path == null" src="../assets/img/No-Photo-Available.webp" :alt="serie.title" >
+                </div>
+                <div class="card-back">
+                    <div>{{ serie.name }} </div>
             <div>{{ serie.original_name }} </div>
+
+            <!-- PER SISTEMARE LE FLAG MANCANTI SI POTREBBE ANCHE INTERVENIRE SULLO STILE flag-undefined -->
             <country-flag  v-if="serie.original_language=== 'en'" country="gb" size='normal'/>
             <country-flag  v-else-if="serie.original_language=== 'ko'" country="kr" size='normal'/>
             <country-flag  v-else-if="serie.original_language=== 'ja'" country="jp" size='normal'/>
@@ -50,6 +57,9 @@ methods:{
                     <font-awesome-icon :icon="['fas', 'star']" style="color: grey;" />
                 </span>
             </div>
+            <div class="overview">"{{ serie.overview }}"</div>
+                </div>
+            </div>
         </div>
     </div>
   
@@ -58,15 +68,40 @@ methods:{
 
 
 
-<style  scoped>
+<style lang="scss"  scoped>
+@use '../assets/style/partials/variables.scss'as *;
 
 
 .container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1em;
-    margin-bottom: 2em;
+    @include container
+}
+
+.card{
+        @include card-settings;
+        perspective: 1000px;
+    }
+
+    .card-inner{
+        @include card-inner;
+    }
+
+    .card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back{
+    @include card-front-back;
+}
+
+.card-front{
+    color: black;
+}
+
+.card-back{
+    background-color: #1f1f20;
+    color: white;
+    transform: rotateY(180deg);
+    padding: 1em;
 }
 
 h1{
@@ -76,15 +111,18 @@ h1{
 }
 
     .card{
-        margin-top: 5em;
-        text-align: center;
-        width: 342px;
-        height: 700px;
-        border: 2px solid black;
+        @include card-settings;
+        
     }
+
+    .overview{
+    font-style: italic;
+    line-height: 1.2em;
+}
 
     img{
         width: 100%;
+        height: 550px;
     }
 
     div{
